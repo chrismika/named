@@ -1,0 +1,3 @@
+Host dns0?.nj.seenothing.net
+  User circleci
+  ProxyJump circleci@ip.nj.seenothing.net
