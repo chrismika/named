@@ -6,6 +6,7 @@ jobs:
       - image: centos:centos7
     environment:
       TZ: "/usr/share/zoneinfo/America/New_York"
+      MASTER: 69.125.235.157
     steps:
       - checkout
       - add_ssh_keys:
@@ -25,7 +26,7 @@ jobs:
           command: yum -y install rsync >/dev/null 2>&1
       - run:
           name: Install bind
-          command: yum -y install bind bind-utils>/dev/null 2>&1
+          command: yum -y install bind >/dev/null 2>&1
       - run:
           name: Check zones
           command: |
@@ -43,12 +44,12 @@ jobs:
       - run:
           name: Build zone configs for dns00.mgmt.aws
           command: |
-            MASTER=$(dig +short ip.nj.seenothing.net | tail -1)
             FILE="/tmp/dns01.nj:master.zones"
-            for i in $(ls ~/${DIR}); do
+            for i in $(ls ~/project/db.*); do
+              echo $i
               echo "zone \"$(echo ${i} | cut -d. -f2-)\" {" >> ${FILE}
               echo -e "\ttype master;" >> ${FILE}
-              echo -e "\tfile \"/etc/named/${i}/${j}\";" >> ${FILE}
+              echo -e "\tfile \"/etc/named/master/$(basename ${i})\";" >> ${FILE}
               echo "};" >> ${FILE}
               echo >> ${FILE}
             done
