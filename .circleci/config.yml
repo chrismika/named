@@ -57,7 +57,7 @@ jobs:
           command: |
             if [[ -n $(rsync -i --checksum /tmp/dns01.nj:master.zone dns01.nj.seenothing.net:/etc/named/master.zones) ]]; then
               #ssh dns00.mgmt.aws.nymetro.com "sudo rndc reconfig"
-echo something
+              echo something
             fi
 
 workflows:
