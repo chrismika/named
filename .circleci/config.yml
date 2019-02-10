@@ -1,0 +1,35 @@
+version: 2
+
+jobs:
+  buildAndDeploy:
+    docker:
+      - image: centos:centos7
+    environment:
+      TZ: "/usr/share/zoneinfo/America/New_York"
+    steps:
+      - checkout
+      - run:
+          name: Import CentOS GPG key
+          command: rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+      - run:
+          name: Install and configure OpenSSH
+          command: |
+            yum -y install openssh-clients >/dev/null 2>&1
+            mv ~/project/.circleci/known_hosts ~/.ssh/known_hosts
+            chmod 644 ~/.ssh/known_hosts
+            cat ~/project/.circleci/config >> ~/.ssh/config
+      - run:
+          name: Install rsync
+          command: yum -y install rsync >/dev/null 2>&1
+      - run:
+          name: Install bind
+          command: yum -y install bind >/dev/null 2>&1
+
+workflows:
+  version: 2
+  buildAndDeploy:
+    jobs:
+      - buildAndDeploy:
+          filters:
+            branches:
+              only: master
