@@ -59,6 +59,27 @@ jobs:
               #ssh dns00.mgmt.aws.nymetro.com "sudo rndc reconfig"
               echo something
             fi
+      - run:
+          name: Build zone configs for slaves
+          command: |
+            FILE="/tmp/slave.zones"
+            for i in $(ls ~/project/db.*); do
+              echo "zone \"$(echo ${i} | cut -d. -f2-)\" {" >> ${FILE}
+              echo -e "\ttype slave;" >> ${FILE}
+              echo -e "\tmasters { ${MASTER}; };" >> ${FILE}
+              echo -e "\tfile \"slaves/${i}\";" >> ${FILE}
+              echo "};" >> ${FILE}
+              echo >> ${FILE}
+            done
+      - run:
+          name: Push zone configs to internal slaves
+          command: |
+            for i in dns02.nj s01.ny s01.va; do
+              if [[ -n $(rsync -i --checksum /tmp/slave.zones ${i}.seenothing.net:/etc/named/slave.zones) ]]; then
+                #ssh dns${i}.mgmt.aws.nymetro.com "sudo rndc reconfig"
+                echo somethien
+              fi
+            done
 
 workflows:
   version: 2
