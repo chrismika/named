@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Push zones to dns01.nj
           command: |
-            OUTPUT+=$(rsync -ri --checksum --delete --copy-links ~/project/db.* dns0:/etc/named/master/)
+            OUTPUT+=$(rsync -ri --checksum --delete --copy-links ~/project/db.* dns01.nj.seenothing.net:/etc/named/master/)
             #if [[ -n ${OUTPUT} ]]; then
             #  ssh dns01.nj.seenothing.net "sudo rndc reload"
             #fi
