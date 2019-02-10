@@ -26,6 +26,13 @@ jobs:
       - run:
           name: Install bind
           command: yum -y install bind >/dev/null 2>&1
+      - run:
+          name: Check zones
+          command: |
+            for i in $(ls ~/project/db.*); do
+              ZONE=$(echo ${i} | cut -d. -f2-)
+              named-checkzone ${ZONE} ~/project/${i} >/dev/null 2>&1 || { echo "Problem with ${i}"; exit 1; }
+            done 
 
 workflows:
   version: 2
