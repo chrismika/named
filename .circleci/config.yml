@@ -25,7 +25,7 @@ jobs:
           command: yum -y install rsync >/dev/null 2>&1
       - run:
           name: Install bind
-          command: yum -y install bind >/dev/null 2>&1
+          command: yum -y install bind bind-utils>/dev/null 2>&1
       - run:
           name: Check zones
           command: |
