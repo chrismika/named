@@ -40,7 +40,25 @@ jobs:
             #if [[ -n ${OUTPUT} ]]; then
             #  ssh dns01.nj.seenothing.net "sudo rndc reload"
             #fi
-
+      - run:
+          name: Build zone configs for dns00.mgmt.aws
+          command: |
+            MASTER=$(dig +short ip.nj.seenothing.net | tail -1)
+            FILE="/tmp/dns01.nj:master.zones"
+            for i in $(ls ~/${DIR}); do
+              echo "zone \"$(echo ${i} | cut -d. -f2-)\" {" >> ${FILE}
+              echo -e "\ttype master;" >> ${FILE}
+              echo -e "\tfile \"/etc/named/${i}/${j}\";" >> ${FILE}
+              echo "};" >> ${FILE}
+              echo >> ${FILE}
+            done
+      - run:
+          name: Push zone configs to dns00.mgmt.aws
+          command: |
+            if [[ -n $(rsync -i --checksum /tmp/dns01.nj:master.zone dns01.nj.seenothing.net:/etc/named/master.zones) ]]; then
+              #ssh dns00.mgmt.aws.nymetro.com "sudo rndc reconfig"
+echo something
+            fi
 
 workflows:
   version: 2
