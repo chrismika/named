@@ -56,7 +56,7 @@ jobs:
       - run:
           name: Push zone configs to dns00.mgmt.aws
           command: |
-            if [[ -n $(rsync -i --checksum /tmp/dns01.nj:master.zone dns01.nj.seenothing.net:/etc/named/master.zones) ]]; then
+            if [[ -n $(rsync -i --checksum /tmp/dns01.nj:master.zones dns01.nj.seenothing.net:/etc/named/master.zones) ]]; then
               #ssh dns00.mgmt.aws.nymetro.com "sudo rndc reconfig"
               echo something
             fi
