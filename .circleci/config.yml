@@ -33,6 +33,14 @@ jobs:
               ZONE=$(echo ${i} | cut -d. -f2-)
               named-checkzone ${ZONE} ${i} >/dev/null 2>&1 || { echo "Problem with ${i}"; exit 1; }
             done 
+      - run:
+          name: Push zones to dns01.nj
+          command: |
+            OUTPUT+=$(rsync -ri --checksum --delete --copy-links ~/project/db.* dns0:/etc/named/master/)
+            #if [[ -n ${OUTPUT} ]]; then
+            #  ssh dns01.nj.seenothing.net "sudo rndc reload"
+            #fi
+
 
 workflows:
   version: 2
