@@ -46,7 +46,6 @@ jobs:
           command: |
             FILE="/tmp/dns01.nj:master.zones"
             for i in $(ls ~/project/db.*); do
-              echo $i
               echo "zone \"$(echo ${i} | cut -d. -f2-)\" {" >> ${FILE}
               echo -e "\ttype master;" >> ${FILE}
               echo -e "\tfile \"/etc/named/master/$(basename ${i})\";" >> ${FILE}
