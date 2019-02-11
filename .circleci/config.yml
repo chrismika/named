@@ -92,10 +92,9 @@ jobs:
       - run:
           name: Push zone configs to external slaves
           command: |
-            for i in dns02.nj s01.ny s01.va; do
+            for i in s01.ny s01.va; do
               if [[ -n $(rsync -i --checksum /tmp/extslave.zones ${i}.seenothing.net:/etc/named/slave.zones) ]]; then
-                #ssh ${i}.seenothing.net "sudo rndc reconfig"
-                echo something
+                ssh ${i}.seenothing.net "sudo rndc reconfig"
               fi
             done
 
