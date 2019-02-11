@@ -32,20 +32,17 @@ jobs:
           name: Check zones
           command: |
             for i in $(ls ~/project/db.*); do
-              echo $i
               ZONE=$(echo ${i} | cut -d. -f2-)
-              echo $ZONE
               named-checkzone ${ZONE} ${i} >/dev/null 2>&1 || { echo "Problem with ${i}"; exit 1; }
             done 
       - run:
           name: Push zones to dns01.nj
           command: |
-            OUTPUT+=$(rsync -ri --checksum --delete --copy-links ~/project/db.* dns01.nj.seenothing.net:/etc/named/master/)
-            if [[ -n ${OUTPUT} ]]; then
+            if [[ -n $(rsync -ri --checksum --delete --copy-links ~/project/db.* dns01.nj.seenothing.net:/etc/named/master/) ]]; then
               ssh dns01.nj.seenothing.net "sudo rndc reload"
             fi
       - run:
-          name: Build zone configs for dns01.nj
+          name: Build zone config for dns01.nj
           command: |
             FILE="/tmp/master.zones"
             for i in $(ls ~/project/db.*); do
@@ -56,15 +53,15 @@ jobs:
               echo >> ${FILE}
             done
       - run:
-          name: Push zone configs to dns01.nj
+          name: Push zone config to dns01.nj
           command: |
             if [[ -n $(rsync -i --checksum /tmp/master.zones dns01.nj.seenothing.net:/etc/named/master.zones) ]]; then
               ssh dns01.nj.seenothing.net "sudo rndc reconfig"
             fi
       - run:
-          name: Build zone configs for internal slave
+          name: Build zone config for internal slave
           command: |
-            FILE="/tmp/intslave.zones"
+            FILE="/tmp/internal:slave.zones"
             for i in $(ls ~/project/db.*); do
               echo "zone \"$(echo ${i} | cut -d. -f2-)\" {" >> ${FILE}
               echo -e "\ttype slave;" >> ${FILE}
@@ -74,15 +71,15 @@ jobs:
               echo >> ${FILE}
             done
       - run:
-          name: Push zone configs to internal slave
+          name: Push zone config to internal slave
           command: |
-            if [[ -n $(rsync -i --checksum /tmp/intslave.zones dns02.nj.seenothing.net:/etc/named/slave.zones) ]]; then
+            if [[ -n $(rsync -i --checksum /tmp/internal:slave.zones dns02.nj.seenothing.net:/etc/named/slave.zones) ]]; then
               ssh dns02.nj.seenothing.net "sudo rndc reconfig"
             fi
       - run:
-          name: Build zone configs for external slaves
+          name: Build zone config for external slaves
           command: |
-            FILE="/tmp/extslave.zones"
+            FILE="/tmp/external:slave.zones"
             for i in $(ls ~/project/db.*); do
               echo "zone \"$(echo ${i} | cut -d. -f2-)\" {" >> ${FILE}
               echo -e "\ttype slave;" >> ${FILE}
@@ -92,10 +89,10 @@ jobs:
               echo >> ${FILE}
             done
       - run:
-          name: Push zone configs to external slaves
+          name: Push zone config to external slaves
           command: |
             for i in s01.ny s01.va; do
-              if [[ -n $(rsync -i --checksum /tmp/extslave.zones ${i}.seenothing.net:/etc/named/slave.zones) ]]; then
+              if [[ -n $(rsync -i --checksum /tmp/external:slave.zones ${i}.seenothing.net:/etc/named/slave.zones) ]]; then
                 ssh ${i}.seenothing.net "sudo rndc reconfig"
               fi
             done
