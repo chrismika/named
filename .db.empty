@@ -4,7 +4,7 @@ $TTL 600
 ; SOA record
 ; ------------------------------X-------
 @ IN SOA dns01.seenothing.net. public.seenothing.org. (
-				2019021005 ; Serial Number (YYYYMMDDNN)
+				2019021006 ; Serial Number (YYYYMMDDNN)
 				3600 ; Refresh
 				600 ; Retry
 				2419200 ; Expire
