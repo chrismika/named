@@ -67,7 +67,7 @@ jobs:
               echo "zone \"$(echo ${i} | cut -d. -f2-)\" {" >> ${FILE}
               echo -e "\ttype slave;" >> ${FILE}
               echo -e "\tmasters { ${MASTER}; };" >> ${FILE}
-              echo -e "\tfile \"slaves/${i}\";" >> ${FILE}
+              echo -e "\tfile \"slaves/$(basename ${i})\";" >> ${FILE}
               echo "};" >> ${FILE}
               echo >> ${FILE}
             done
