@@ -19,8 +19,7 @@ jobs:
           name: Install and configure OpenSSH
           command: |
             yum -y install openssh-clients >/dev/null 2>&1
-            mv ~/project/.circleci/known_hosts ~/.ssh/known_hosts
-            chmod 644 ~/.ssh/known_hosts
+            install -m 644 ~/project/.circleci/known_hosts ~/.ssh/known_hosts
             cat ~/project/.circleci/config >> ~/.ssh/config
       - run:
           name: Install rsync
