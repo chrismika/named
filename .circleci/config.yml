@@ -42,9 +42,9 @@ jobs:
               ssh dns01.nj.seenothing.net "sudo rndc reload"
             fi
       - run:
-          name: Build zone configs for dns00.mgmt.aws
+          name: Build zone configs for dns01.nj
           command: |
-            FILE="/tmp/dns01.nj:master.zones"
+            FILE="/tmp/master.zones"
             for i in $(ls ~/project/db.*); do
               echo "zone \"$(echo ${i} | cut -d. -f2-)\" {" >> ${FILE}
               echo -e "\ttype master;" >> ${FILE}
@@ -53,10 +53,10 @@ jobs:
               echo >> ${FILE}
             done
       - run:
-          name: Push zone configs to dns00.mgmt.aws
+          name: Push zone configs to dns01.nj
           command: |
-            if [[ -n $(rsync -i --checksum /tmp/dns01.nj:master.zones dns01.nj.seenothing.net:/etc/named/master.zones) ]]; then
-              ssh dns00.mgmt.aws.nymetro.com "sudo rndc reconfig"
+            if [[ -n $(rsync -i --checksum /tmp/master.zones dns01.nj.seenothing.net:/etc/named/master.zones) ]]; then
+              ssh dns01.nj.seenothing.net "sudo rndc reconfig"
             fi
       - run:
           name: Build zone configs for slaves
@@ -71,13 +71,12 @@ jobs:
               echo >> ${FILE}
             done
       - run:
-          name: Push zone configs to internal slaves
+          name: Push zone configs to slaves
           command: |
             #for i in dns02.nj s01.ny s01.va; do
             for i in dns02.nj; do
               if [[ -n $(rsync -i --checksum /tmp/slave.zones ${i}.seenothing.net:/etc/named/slave.zones) ]]; then
-                #ssh dns${i}.mgmt.aws.nymetro.com "sudo rndc reconfig"
-                echo somethien
+                ssh ${i}.seenothing.net "sudo rndc reconfig"
               fi
             done
 
