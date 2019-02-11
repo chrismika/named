@@ -16,6 +16,12 @@ jobs:
           name: Import CentOS GPG key
           command: rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
       - run:
+          name: Install and configure OpenSSH
+          command: |
+            yum -y install openssh-clients >/dev/null 2>&1
+            install -m 644 ~/project/.circleci/known_hosts ~/.ssh/known_hosts
+            cat ~/project/.circleci/config >> ~/.ssh/config
+      - run:
           name: Install rsync
           command: yum -y install rsync >/dev/null 2>&1
       - run:
