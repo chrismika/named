@@ -6,7 +6,8 @@ jobs:
       - image: centos:centos7
     environment:
       TZ: "/usr/share/zoneinfo/America/New_York"
-      MASTER: 69.125.235.157
+      EXTMASTER: 69.125.235.157
+      INTMASTER: 192.168.1.12
     steps:
       - checkout
       - add_ssh_keys:
@@ -59,13 +60,13 @@ jobs:
               ssh dns01.nj.seenothing.net "sudo rndc reconfig"
             fi
       - run:
-          name: Build zone configs for slaves
+          name: Build zone configs for internal slave
           command: |
-            FILE="/tmp/slave.zones"
+            FILE="/tmp/intslave.zones"
             for i in $(ls ~/project/db.*); do
               echo "zone \"$(echo ${i} | cut -d. -f2-)\" {" >> ${FILE}
               echo -e "\ttype slave;" >> ${FILE}
-              echo -e "\tmasters { ${MASTER}; };" >> ${FILE}
+              echo -e "\tmasters { ${INTMASTER}; };" >> ${FILE}
               echo -e "\tfile \"slaves/$(basename ${i})\";" >> ${FILE}
               echo "};" >> ${FILE}
               echo >> ${FILE}
@@ -73,10 +74,28 @@ jobs:
       - run:
           name: Push zone configs to slaves
           command: |
-            #for i in dns02.nj s01.ny s01.va; do
-            for i in dns02.nj; do
-              if [[ -n $(rsync -i --checksum /tmp/slave.zones ${i}.seenothing.net:/etc/named/slave.zones) ]]; then
-                ssh ${i}.seenothing.net "sudo rndc reconfig"
+            if [[ -n $(rsync -i --checksum /tmp/intslave.zones ${i}.seenothing.net:/etc/named/slave.zones) ]]; then
+              ssh dns02.nj.seenothing.net "sudo rndc reconfig"
+            fi
+      - run:
+          name: Build zone configs for slaves
+          command: |
+            FILE="/tmp/extslave.zones"
+            for i in $(ls ~/project/db.*); do
+              echo "zone \"$(echo ${i} | cut -d. -f2-)\" {" >> ${FILE}
+              echo -e "\ttype slave;" >> ${FILE}
+              echo -e "\tmasters { ${EXTMASTER}; };" >> ${FILE}
+              echo -e "\tfile \"slaves/$(basename ${i})\";" >> ${FILE}
+              echo "};" >> ${FILE}
+              echo >> ${FILE}
+            done
+      - run:
+          name: Push zone configs to slaves
+          command: |
+            for i in dns02.nj s01.ny s01.va; do
+              if [[ -n $(rsync -i --checksum /tmp/extslave.zones ${i}.seenothing.net:/etc/named/slave.zones) ]]; then
+                #ssh ${i}.seenothing.net "sudo rndc reconfig"
+                echo something
               fi
             done
 
