@@ -34,6 +34,7 @@ jobs:
             for i in $(ls ~/project/db.*); do
               echo $i
               ZONE=$(echo ${i} | cut -d. -f2-)
+              echo $ZONE
               named-checkzone ${ZONE} ${i} >/dev/null 2>&1 || { echo "Problem with ${i}"; exit 1; }
             done 
       - run:
