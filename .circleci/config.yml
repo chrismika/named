@@ -72,13 +72,13 @@ jobs:
               echo >> ${FILE}
             done
       - run:
-          name: Push zone configs to slaves
+          name: Push zone configs to internal slave
           command: |
-            if [[ -n $(rsync -i --checksum /tmp/intslave.zones ${i}.seenothing.net:/etc/named/slave.zones) ]]; then
+            if [[ -n $(rsync -i --checksum /tmp/intslave.zones dns02.nj.seenothing.net:/etc/named/slave.zones) ]]; then
               ssh dns02.nj.seenothing.net "sudo rndc reconfig"
             fi
       - run:
-          name: Build zone configs for slaves
+          name: Build zone configs for external slaves
           command: |
             FILE="/tmp/extslave.zones"
             for i in $(ls ~/project/db.*); do
@@ -90,7 +90,7 @@ jobs:
               echo >> ${FILE}
             done
       - run:
-          name: Push zone configs to slaves
+          name: Push zone configs to external slaves
           command: |
             for i in dns02.nj s01.ny s01.va; do
               if [[ -n $(rsync -i --checksum /tmp/extslave.zones ${i}.seenothing.net:/etc/named/slave.zones) ]]; then
