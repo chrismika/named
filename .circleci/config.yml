@@ -10,8 +10,8 @@ jobs:
       INTMASTER: 192.168.1.12
     steps:
       - checkout
-      - add_ssh_keys:
-          fingerprints: "20:9b:05:97:0b:36:7a:fe:98:38:3e:d9:1b:dd:1c:34"
+#      - add_ssh_keys:
+#          fingerprints: "20:9b:05:97:0b:36:7a:fe:98:38:3e:d9:1b:dd:1c:34"
       - run:
           name: Import CentOS GPG key
           command: rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
