@@ -6,6 +6,9 @@ import dns.zone
 import dns.resolver
 import dns.tsigkeyring
 import re
+import os
+
+dir = os.path.dirname(os.path.realpath(__file__))
 
 reverseDNS = dns.resolver.Resolver()
 reverseDNS.nameservers=["69.125.235.157", "168.235.68.77", "52.201.141.242"]
@@ -16,7 +19,7 @@ serial = reverseDNS.query("168.192.in-addr.arpa", "SOA")[0].serial + 1
 zoneFileName = "db.168.192.in-addr.arpa"
 
 entries = []
-zone = dns.zone.from_file('db.seenothing.net')
+zone = dns.zone.from_file(dir + '/db.seenothing.net')
 for (name, ttl, rdata) in zone.iterate_rdatas('A'):
   if re.match(r"^192.168.", rdata.to_text()):
     entry = {
@@ -26,15 +29,15 @@ for (name, ttl, rdata) in zone.iterate_rdatas('A'):
     }
     entries.append(entry)
 
-with open(".db.template", "r") as sources:
+with open(dir + "/.db.template", "r") as sources:
   lines = sources.readlines()
-with open(zoneFileName, "w+") as sources:
+with open(dir + "/" + zoneFileName, "w+") as sources:
   for line in lines:
     line = re.sub(r"<SERIAL>", str(serial), line)
     line = re.sub(r"<DOMAIN>", zoneFileName.partition(".")[2], line)
     sources.write(line)
 
-sources = open(zoneFileName, "a")
+sources = open(dir + "/" + zoneFileName, "a")
 sources.write("\n;\n; PTR records\n; ------------------------------X---------------X-----\n")
 for i in sorted(entries, key=lambda k: (int(k["thirdOctet"]), int(k["fourthOctet"]))):
   sources.write(i["fourthOctet"] + "." + i["thirdOctet"] + "\t\t\t\tIN PTR\t\t" + i["name"] + "\n")
