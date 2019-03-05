@@ -12,8 +12,8 @@ dir = os.path.dirname(os.path.realpath(__file__))
 
 reverseDNS = dns.resolver.Resolver()
 reverseDNS.nameservers=["69.125.235.157", "168.235.68.77", "52.201.141.242"]
-keyring = dns.tsigkeyring.from_text({"query-key":"kVhxznJq5fgHn961Am7EZw=="})
-reverseDNS.use_tsig(keyring, keyname="query-key")
+keyring = dns.tsigkeyring.from_text({os.environ['tsigName']:os.environ['tsigKey']})
+reverseDNS.use_tsig(keyring, keyname=os.environ['tsigName'])
 serial = reverseDNS.query("168.192.in-addr.arpa", "SOA")[0].serial + 1
 
 zoneFileName = "db.168.192.in-addr.arpa"

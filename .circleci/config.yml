@@ -54,7 +54,7 @@ jobs:
               echo -e "\ttype master;" >> ${FILE}
               echo -e "\tfile \"/etc/named/master/$(basename ${i})\";" >> ${FILE}
               if [[ ${i} =~ in-addr.arpa$ ]]; then
-                echo -e "\tallow-query { key query-key; 192.168.0.0/16; };" >> ${FILE}
+                echo -e "\tallow-query { key ${tsigName}; 192.168.0.0/16; };" >> ${FILE}
               fi
               echo "};" >> ${FILE}
               echo >> ${FILE}
