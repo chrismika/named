@@ -1,7 +1,5 @@
 #!/usr/bin/python
 
-# update config script to limit allow-query to reverse zone
-
 import dns.zone
 import dns.resolver
 import dns.tsigkeyring
