@@ -28,10 +28,11 @@ jobs:
           name: Install bind
           command: yum -y install bind >/dev/null 2>&1
       - run:
+          name: Install dnspython
+          command: yum -y install python-dns
+      - run:
           name: Create reverse zone
-          command: |
-            yum -y install python-dns
-            ~/project/.createReverseZone.py
+          command: ~/project/.createReverseZone.py
       - run:
           name: Check zones
           command: |
