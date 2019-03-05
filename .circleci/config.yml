@@ -29,7 +29,9 @@ jobs:
           command: yum -y install bind >/dev/null 2>&1
       - run:
           name: Create reverse zone
-          command: ~/project/.createReverseZone.py
+          command: |
+            yum -y install python-dns
+            ~/project/.createReverseZone.py
       - run:
           name: Check zones
           command: |
