@@ -76,7 +76,7 @@ jobs:
               echo -e "\tmasters { ${INTMASTER}; };" >> ${FILE}
               echo -e "\tfile \"slaves/$(basename ${i})\";" >> ${FILE}
               if [[ ${i} =~ in-addr.arpa$ ]]; then
-                echo -e "\tallow-query { key query-key; 192.168.0.0/16; };" >> ${FILE}
+                echo -e "\tallow-query { key ${tsigName}; 192.168.0.0/16; };" >> ${FILE}
               fi
               echo "};" >> ${FILE}
               echo >> ${FILE}
@@ -97,7 +97,7 @@ jobs:
               echo -e "\tmasters { ${EXTMASTER}; };" >> ${FILE}
               echo -e "\tfile \"slaves/$(basename ${i})\";" >> ${FILE}
               if [[ ${i} =~ in-addr.arpa$ ]]; then
-                echo -e "\tallow-query { key query-key; 192.168.0.0/16; };" >> ${FILE}
+                echo -e "\tallow-query { key ${tsigName}; 192.168.0.0/16; };" >> ${FILE}
               fi
               echo "};" >> ${FILE}
               echo >> ${FILE}
