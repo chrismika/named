@@ -38,4 +38,4 @@ with open(dir + "/" + zoneFileName, "w+") as sources:
 sources = open(dir + "/" + zoneFileName, "a")
 sources.write("\n;\n; PTR records\n; ------------------------------X---------------X-----\n")
 for i in sorted(entries, key=lambda k: (int(k["thirdOctet"]), int(k["fourthOctet"]))):
-  sources.write(i["fourthOctet"] + "." + i["thirdOctet"] + "\t\t\t\tIN PTR\t\t" + i["name"] + "\n")
+  sources.write(i["fourthOctet"] + "." + i["thirdOctet"] + "\t\t\t\tIN PTR\t\t" + i["name"] + ".nj.seenothing.net.\n")
