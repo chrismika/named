@@ -5,6 +5,7 @@ import dns.resolver
 import dns.tsigkeyring
 from netaddr import IPNetwork, IPAddress
 import os
+import re
 
 dir = os.path.dirname(os.path.realpath(__file__))
 
@@ -18,9 +19,7 @@ zoneFileName = "db.168.192.in-addr.arpa"
 
 entries = []
 zone = dns.zone.from_file(dir + '/db.seenothing.net')
-for (name, ttl, rdata) in zone.iterate_rdatas('A'):
-  if IPAddress(rdata.to_text()) in IPNetwork("192.168.0.0/16"):
-    print name
+for (name, ttl, rdata) in filter(lambda x: IPAddress(x[2].to_text()) in IPNetwork("192.168.0.0/16"), zone.iterate_rdatas('A')):
     entry = {
       "thirdOctet": rdata.to_text().split(".")[2],
       "fourthOctet": rdata.to_text().split(".")[3],
