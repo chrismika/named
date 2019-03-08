@@ -9,7 +9,7 @@ from os import environ, path
 from re import sub
 
 def md5File(fileName):
-  md5Hash = md5()
+  md5Hash = md5(environ["salt"])
   with open(fileName, "rb") as source:
     for chunk in iter(lambda: source.read(4096), b""):
       md5Hash.update(chunk)
