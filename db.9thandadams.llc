@@ -4,7 +4,7 @@ $TTL 600
 ; SOA record
 ; ------------------------------X-------
 @ IN SOA dns01.seenothing.net. public.seenothing.org. (
-				2019031904 ; Serial Number (YYYYMMDDNN)
+				2019031905 ; Serial Number (YYYYMMDDNN)
 				3600 ; Refresh
 				600 ; Retry
 				2419200 ; Expire
@@ -39,3 +39,4 @@ $TTL 600
 ; ------------------------------X---------------X-----
 @				IN TXT		"v=spf1 include:_spf.google.com ~all"
 9thandadams.com._domainkey	IN TXT		"v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApzva8tcrv4u14kAmoYgtnYS1GsV3nx0y5d551qSV3voMyyP8s/bZUcilcvr+j0U8/Dw9JBKGTlBEUvQXJo7XS17cvBAUUNS1tJHeUdqJEEhj9XWr3fRWkDVmts0tTXiFf/mt4+3crdEULObTPxy45XhrsNYEx01L2lMjB91lQ883m0mU7KS+lHL8PRzdBxx4" "OBAszqVrUpYE+keZdfYEAeuD2uNUiY0Z/NRseklbKHZKv31C9nlS5oPGoWgcL4PBEAKgYUKJ+lRqoIkX+e50wmuL23zZ8DdyIplEHD1q+6Jxzr3bZrT7fusGkP/UMOivNNTpBBlHRm5YQBSSO3XW8wIDAQAB"
+9thandadams.llc._domainkey	IN TXT		"v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAogPUH7NBRmNg8l+rKUS3pTlE/ZMtylwNRWK6w0eQRyPGvvQsnD4wGFyK9AdmZ4qeC2FODeS01XAwT2jaAGKwjzxxhjHO0dC0NqW9kMKdH4Ptk/GDYCL0pS10xF83fx2OASA+DrWm05DZIUTY+rVcE+4CCDvzPzTjg4CFtqKWNX3EFHZUZg2WY6lPpyD6vOJ9" "K7QgJbeLg3sV1PnznZMADHZfmGnxY4MQ2hyUHBg9Bx+jc58wPt7TymHbgLJvXt1dfashtoW0V6387Z4VroEn8IzFy5VL/kUW7TsVfxy5QUptzOJd7wixbKxSsJ6wRazQQ3klIAHSl9SFfOiPbOCxfwIDAQAB"
