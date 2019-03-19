@@ -5,7 +5,7 @@ $ORIGIN 9thandadams.com.
 ; SOA record
 ; ------------------------------X-------
 @ IN SOA dns01.seenothing.net. public.seenothing.org. (
-				2019031900 ; Serial Number (YYYYMMDDNN)
+				2019031901 ; Serial Number (YYYYMMDDNN)
 				3600 ; Refresh
 				600 ; Retry
 				2419200 ; Expire
@@ -21,6 +21,11 @@ $ORIGIN 9thandadams.com.
 ;
 ; MX records
 ; ------------------------------X---------------X-----
+@				IN MX		1 aspmx.l.google.com.
+@				IN MX		5 alt1.aspmx.l.google.com.
+@				IN MX		5 alt2.aspmx.l.google.com.
+@				IN MX		10 aspmx2.googlemail.com.
+@				IN MX		10 aspmx3.googlemail.com.
 
 ;
 ; A records
@@ -33,4 +38,3 @@ $ORIGIN 9thandadams.com.
 ;
 ; TXT records
 ; ------------------------------X---------------X-----
-@				IN TXT		google-site-verification=5psDikQypllCP9EgzuUuMpGK-aFTimOj5IemRY4ocrs
