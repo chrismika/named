@@ -1,1 +1,42 @@
-.db.empty
+$TTL 600
+
+;
+; SOA record
+; ------------------------------X-------
+@ IN SOA dns01.seenothing.net. public.seenothing.org. (
+				2019031902 ; Serial Number (YYYYMMDDNN)
+				3600 ; Refresh
+				600 ; Retry
+				2419200 ; Expire
+				600 ) ; Minimum
+
+;
+; NS records
+; ------------------------------X---------------X-----
+@				IN NS		dns01.seenothing.net.
+@				IN NS		dns02.seenothing.net.
+@				IN NS		dns03.seenothing.net.
+
+;
+; MX records
+; ------------------------------X---------------X-----
+@				IN MX		1 aspmx.l.google.com.
+@				IN MX		5 alt1.aspmx.l.google.com.
+@				IN MX		5 alt2.aspmx.l.google.com.
+@				IN MX		10 aspmx2.googlemail.com.
+@				IN MX		10 aspmx3.googlemail.com.
+
+;
+; A records
+; ------------------------------X---------------X-----
+
+;
+; CNAME records
+; ------------------------------X---------------X-----
+
+;
+; TXT records
+; ------------------------------X---------------X-----
+@				IN TXT		google-site-verification=w4Irn8y_MS2BW8vUP7Pw2ALjB_9Q3PS030-Arw9sFNE
+@				IN TXT		google-site-verification=fVDCzMJmnrkrquBkpwzQviGPpAECWmnTXka-ukkuce4
+@				IN TXT		google-site-verification=wGJV_-WI2ucC806odjh__9Nk6vcG6xy3cLIH019RK5Y
