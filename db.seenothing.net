@@ -5,7 +5,7 @@ $ORIGIN seenothing.net.
 ; SOA record
 ; ------------------------------X-------
 @ IN SOA dns01.seenothing.net. public.seenothing.org. (
-				2019030700 ; Serial Number (YYYYMMDDNN)
+				2019032300 ; Serial Number (YYYYMMDDNN)
 				3600 ; Refresh
 				600 ; Retry
 				2419200 ; Expire
@@ -33,6 +33,7 @@ dns02				IN A		168.235.68.77
 dns02.nj			IN A		192.168.1.13
 dns03				IN A		52.201.141.242
 gw01.nj				IN A		192.168.1.1
+mysql01.nj			IN A		192.168.1.14
 nas01.nj			IN A		192.168.1.6
 plex01.nj			IN A		192.168.1.8
 roku01.nj			IN A		192.168.4.4
