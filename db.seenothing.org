@@ -5,7 +5,7 @@ $ORIGIN seenothing.org.
 ; SOA record
 ; ------------------------------X-------
 @ IN SOA dns01.seenothing.net. public.seenothing.org. (
-				2019021100 ; Serial Number (YYYYMMDDNN)
+				2019060500 ; Serial Number (YYYYMMDDNN)
 				3600 ; Refresh
 				600 ; Retry
 				2419200 ; Expire
@@ -42,5 +42,6 @@ www				IN CNAME	ip.nj.seenothing.net.
 ; TXT records
 ; ------------------------------X---------------X-----
 @				IN TXT		"v=spf1 a include:_spf.google.com ~all"
+@				IN TXT		"keybase-site-verification=qkQFYc8x0rgEv96XXV9U8oibSr6GGgJrPqg-_ZCVKlk"
 google._domainkey		IN TXT		"v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiB2bkey+r8X3PTdlMey9poi2SHXMWrBtixWRPmVylTxjfQo4xNIV5dFpEvMGs7eDmWSgcjoA9L1iiQh7k8uKg/bwVcBpD2iPHEfU5Ll4Rmg4c91vv2qKG15U/gb9siyB1eHUdWUJQaP/UhV3ElXbfC7k4VehR8ro0EM9tWP52Ox2169xttg/iLdwnIIChZnr" "ewGfpRU17E20k7hG2P+gMyPNZiOmRprgSIIWshm9injPMlfAXKtLs+XDhuvr4JbUjTOcZwPzF030xYE69hZWedCMjpEDDCzn1Q0FHLOLIgR+IpEfgXgH8gFXwxz8wz0cWWPO/jEG0u8NvrHq6+zjXQIDAQAB"
 public				IN TXT		"v=spf1 a include:_spf.google.com ~all"
