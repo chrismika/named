@@ -5,7 +5,7 @@ $ORIGIN sortable.email.
 ; SOA record
 ; ------------------------------X-------
 @ IN SOA dns01.seenothing.net. public.seenothing.org. (
-				2019030400 ; Serial Number (YYYYMMDDNN)
+				2019060500 ; Serial Number (YYYYMMDDNN)
 				3600 ; Refresh
 				600 ; Retry
 				2419200 ; Expire
@@ -35,3 +35,4 @@ $ORIGIN sortable.email.
 ; TXT records
 ; ------------------------------X---------------X-----
 @				IN TXT		"v=spf1 a include:_spf.google.com ~all"
+@				IN TXT		"keybase-site-verification=2DWyyydM-ou5sxaNmtE7n_cuk-hg19cN0ts2yi_-PMw"
