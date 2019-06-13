@@ -5,7 +5,7 @@ $ORIGIN seenothing.net.
 ; SOA record
 ; ------------------------------X-------
 @ IN SOA dns01.seenothing.net. public.seenothing.org. (
-				2019061203 ; Serial Number (YYYYMMDDNN)
+				2019061300 ; Serial Number (YYYYMMDDNN)
 				3600 ; Refresh
 				600 ; Retry
 				2419200 ; Expire
@@ -54,7 +54,6 @@ web01.nj			IN A		192.168.1.10
 ; CNAME records
 ; ------------------------------X---------------X-----
 ip.nj				IN CNAME	seenothing-net.dlinkddns.com.
-s101				IN CNAME	s01.ny
 
 ;
 ; TXT records
