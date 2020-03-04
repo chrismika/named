@@ -5,7 +5,7 @@ $ORIGIN mika.family.
 ; SOA record
 ; ------------------------------X-------
 @ IN SOA dns01.seenothing.net. public.seenothing.org. (
-				2020030400 ; Serial Number (YYYYMMDDNN)
+				2020030401 ; Serial Number (YYYYMMDDNN)
 				3600 ; Refresh
 				600 ; Retry
 				2419200 ; Expire
@@ -31,7 +31,6 @@ $ORIGIN mika.family.
 ; CNAME records
 ; ------------------------------X---------------X-----
 www				IN CNAME	mika.family.
-_5D8A8B60F916C10B74A99660220BA5AE IN CNAME	213197B8EB50C30BE9F032B0C3BB3F39.458A7AE1F290AB8059F79171B89C3353.5e5fcb569d492.comodoca.com.
 
 ;
 ; TXT records
