@@ -18,6 +18,9 @@ jobs:
       - run:
           name: Install and configure OpenSSH
           command: |
+            # here
+            echo "148.75.37.69 ip.nj.seenothing.net" >> /etc/hosts
+            # end here
             yum -y install openssh-clients >/dev/null 2>&1
             install -m 644 ~/project/.circleci/known_hosts ~/.ssh/known_hosts
             cat ~/project/.circleci/config >> ~/.ssh/config
