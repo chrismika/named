@@ -23,7 +23,7 @@ templateZoneFile = dir + "/.db.template"
 
 # Compare hash of zone and remote
 dnsResolver = dns.resolver.Resolver()
-dnsResolver.nameservers=["69.125.235.157", "168.235.68.77", "52.201.141.242"]
+dnsResolver.nameservers=["148.75.37.69", "168.235.68.77", "52.201.141.242"]
 keyring = dns.tsigkeyring.from_text({environ["tsigName"]:environ["tsigKey"]})
 dnsResolver.use_tsig(keyring, keyname=environ["tsigName"])
 remoteHash = dnsResolver.query(reverseZoneName, "TXT")[0].to_text()
