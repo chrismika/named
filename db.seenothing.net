@@ -5,7 +5,7 @@ $ORIGIN seenothing.net.
 ; SOA record
 ; ------------------------------X-------
 @ IN SOA dns01.seenothing.net. public.seenothing.org. (
-				2020072900 ; Serial Number (YYYYMMDDNN)
+				2020072901 ; Serial Number (YYYYMMDDNN)
 				3600 ; Refresh
 				600 ; Retry
 				2419200 ; Expire
@@ -17,6 +17,10 @@ $ORIGIN seenothing.net.
 @				IN NS		dns01.seenothing.net.
 @				IN NS		dns02.seenothing.net.
 @				IN NS		dns03.seenothing.net.
+ip.nj				IN NS		ns5.he.net.
+ip.nj				IN NS		ns4.he.net.
+ip.nj				IN NS		ns3.he.net.
+ip.nj				IN NS		ns2.he.net.
 
 ;
 ; MX records
@@ -54,7 +58,6 @@ web01.nj			IN A		192.168.1.10
 ;
 ; CNAME records
 ; ------------------------------X---------------X-----
-ip.nj				IN CNAME	seenothingnet.ddns.net.
 
 ;
 ; TXT records
