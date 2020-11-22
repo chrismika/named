@@ -5,7 +5,7 @@ $ORIGIN seenothing.net.
 ; SOA record
 ; ------------------------------X-------
 @ IN SOA dns01.seenothing.net. public.seenothing.org. (
-				2020112200 ; Serial Number (YYYYMMDDNN)
+				2020112201 ; Serial Number (YYYYMMDDNN)
 				3600 ; Refresh
 				600 ; Retry
 				2419200 ; Expire
@@ -61,5 +61,3 @@ vm01.nj				IN A		192.168.1.7
 ; TXT records
 ; ------------------------------X---------------X-----
 @				IN TXT		"keybase-site-verification=v4g018zgoDYUu95qXXgZSoC7njGaRMhGyjetY7SPCEI"
-
-_6ACCB409A06CFF3A9ECA23339225F838.vm01.nj	IN CNAME	36B243D3A874714B45509366A64CAD3D.3F4EAD3F15DFBCD13D09BC877673C9DB.5fbac61d7b578.comodoca.com.
