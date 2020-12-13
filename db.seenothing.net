@@ -5,11 +5,11 @@ $ORIGIN seenothing.net.
 ; SOA record
 ; ------------------------------X-------
 @ IN SOA dns01.seenothing.net. public.seenothing.org. (
-				2020112201 ; Serial Number (YYYYMMDDNN)
-				3600 ; Refresh
-				600 ; Retry
-				2419200 ; Expire
-				600 ) ; Minimum
+				2020121300 ; Serial Number (YYYYMMDDNN)
+				86400 ; Refresh
+				7200 ; Retry
+				3600000 ; Expire
+				172800 ) ; Minimum
 
 ;
 ; NS records
