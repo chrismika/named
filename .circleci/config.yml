@@ -6,7 +6,7 @@ jobs:
       - image: centos:centos7
     environment:
       TZ: "/usr/share/zoneinfo/America/New_York"
-      EXTMASTER: 148.75.37.69
+      EXTMASTER: 69.126.6.118
       INTMASTER: 192.168.1.12
     steps:
       - checkout
